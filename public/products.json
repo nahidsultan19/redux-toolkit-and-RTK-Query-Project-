@@ -154,7 +154,7 @@
         "_id": 5,
         "model": "Intel 10th Gen Core i7-10700 Gaming PC",
         "image": "https://live.staticflickr.com/65535/52522308736_8453894269_o.jpg",
-        "status": true,
+        "status": false,
         "rating": 5,
         "keyFeature": [
             "ASRock B560M Steel Legend 10th and 11th Gen Micro ATX Motherboard",
@@ -191,7 +191,7 @@
         "_id": 6,
         "model": "Intel Core i5-11400 11th Gen Gaming PC",
         "image": "https://live.staticflickr.com/65535/52522308721_4f2de69503_o.jpg",
-        "status": true,
+        "status": false,
         "keyFeature": [
             "Intel 11th Gen Core i5-11400 Rocket Lake Processor",
             "MSI B560M-A PRO Intel 11th Gen mATX Motherboard",
