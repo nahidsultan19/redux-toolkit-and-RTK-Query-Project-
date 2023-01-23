@@ -1,12 +1,13 @@
 import React from 'react';
 import { BiListPlus } from 'react-icons/bi';
 import { RiDeleteBin2Line } from 'react-icons/ri';
+import { useDispatch } from 'react-redux';
 import { useLocation } from 'react-router-dom';
+import { addToCart } from '../features/cart/cartSlice';
 
 const ProductCard = ({ product }) => {
-
-
     const { pathname } = useLocation();
+    const dispatch = useDispatch();
 
     return (
         <div className='shadow-lg relative rounded-3xl border  p-3 flex flex-col text-indigo-900'>
@@ -30,7 +31,7 @@ const ProductCard = ({ product }) => {
                     <p className='text-lg'>Remove</p>
                     <RiDeleteBin2Line size={20} />
                 </button>}
-                {!pathname.includes('cart') && <button className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold' >
+                {!pathname.includes('cart') && <button className='bg-indigo-500 rounded-full py-1 px-2 flex-1 text-white text-bold' onClick={() => dispatch(addToCart(product))} >
                     Add to cart
                 </button>}
                 {!pathname.includes('cart') && <button title='Add to wishlist' className='bg-indigo-500  py-1 px-2 rounded-full'>
