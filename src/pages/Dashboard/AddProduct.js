@@ -1,8 +1,11 @@
 import React from 'react';
 import { useForm } from "react-hook-form";
+import { useDispatch } from 'react-redux';
+import { addProduct } from '../../features/products/productsSlice';
 
 const AddProduct = () => {
     const { register, handleSubmit } = useForm();
+    const dispatch = useDispatch();
 
 
     const submit = (data) => {
@@ -19,7 +22,7 @@ const AddProduct = () => {
             ],
             spec: [],
         };
-        console.log(product);
+        dispatch(addProduct(product))
     }
     return (
         <div className='flex justify-center items-center h-full'>
