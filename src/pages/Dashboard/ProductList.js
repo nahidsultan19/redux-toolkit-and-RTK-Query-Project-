@@ -1,30 +1,34 @@
 
+import { useState } from 'react';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { getProducts, removeProduct } from '../../features/products/productsSlice';
+import { useDispatch, } from 'react-redux';
 
 const ProductList = () => {
 
-    const { products, isLoading, deleteSucess, isError, error } = useSelector(state => state.products);
+    // const { products, isLoading, deleteSucess } = useSelector(state => state.products);
+    const [products, setProducts] = useState([])
     const dispatch = useDispatch()
 
 
 
     useEffect(() => {
-        dispatch(getProducts());
-    }, []);
+        fetch("http://localhost:5000/products")
+            .then((res) => res.json())
+            .then((data) => setProducts(data.data))
+    }, [])
 
 
-    useEffect(() => {
-        if (!isLoading && deleteSucess) {
-            toast.success("Successfully removed")
-        }
-    }, [isLoading, deleteSucess])
+    // useEffect(() => {
+    //     if (!isLoading && deleteSucess) {
+    //         toast.success("Successfully removed");
+    //         dispatch(toggleDeleteSucess())
+    //     }
+    // }, [isLoading, deleteSucess, dispatch])
 
-    if (isLoading) {
-        return <p>Loading...</p>
-    }
+    // if (isLoading) {
+    //     return <p>Loading...</p>
+    // }
 
     return (
         <div className='flex flex-col justify-center items-center h-full w-full'>
@@ -82,7 +86,7 @@ const ProductList = () => {
                                     </td>
                                     <td class='p-2'>
                                         <div class='flex justify-center'>
-                                            <button onClick={() => dispatch(removeProduct(_id))}>
+                                            <button>
                                                 <svg
                                                     class='w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1'
                                                     fill='none'
