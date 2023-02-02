@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useState } from 'react';
+import React from 'react';
 import { useDispatch } from 'react-redux';
 import ProductCard from '../../components/ProductCard';
 import { useGetProductsQuery } from '../../features/api/apiSlice';
@@ -22,6 +21,10 @@ const Home = () => {
 
     if (isLoading) {
         content = <h1>Loading...</h1>
+    }
+
+    if (isError) {
+        return <p>Something went wrong...</p>
     }
 
     if (products) {

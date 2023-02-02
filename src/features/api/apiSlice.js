@@ -8,9 +8,18 @@ export const productApi = createApi({
     }),
     endpoints: (builder) => ({
         getProducts: builder.query({
-            query: () => "/products",
+            query: () => ({
+                url: "/products"
+            })
+        }),
+        addProduct: builder.mutation({
+            query: (data) => ({
+                url: "/product",
+                method: "POST",
+                body: data,
+            })
         })
-    })
+    }),
 });
 
-export const { useGetProductsQuery } = productApi;
+export const { useGetProductsQuery, useAddProductMutation } = productApi;

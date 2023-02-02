@@ -3,12 +3,24 @@ import { useEffect } from 'react';
 import { useForm } from "react-hook-form";
 import { toast } from 'react-hot-toast';
 import { useDispatch, useSelector } from 'react-redux';
+import { useAddProductMutation } from '../../features/api/apiSlice';
 
 const AddProduct = () => {
     const { register, handleSubmit, reset } = useForm();
-    // const { isLoading, postSucess, error, isError } = useSelector(state => state.products);
+    const [postProduct, { isLoading, isSuccess }] = useAddProductMutation();
     const dispatch = useDispatch();
 
+
+
+    useEffect(() => {
+        if (isLoading) {
+            toast.loading("Posting...", { id: "addProduct" });
+        }
+        if (isSuccess) {
+            toast.success("Product Added", { id: "addProduct" });
+            reset()
+        }
+    }, [isLoading, isSuccess, reset])
 
     // useEffect(() => {
     //     if (isLoading) {
@@ -40,6 +52,7 @@ const AddProduct = () => {
             spec: [],
         };
         // dispatch(addProduct(product))
+        postProduct(product);
     }
     return (
         <div className='flex justify-center items-center h-full'>
