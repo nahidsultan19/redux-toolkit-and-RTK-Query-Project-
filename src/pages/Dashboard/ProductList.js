@@ -3,20 +3,18 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { toast } from 'react-hot-toast';
 import { useDispatch, } from 'react-redux';
+import { useGetProductsQuery, useRemoveProductMutation } from '../../features/api/apiSlice';
 
 const ProductList = () => {
+    const { data, isLoading } = useGetProductsQuery();
+    const products = data?.data;
+    const [removeProduct] = useRemoveProductMutation();
 
-    // const { products, isLoading, deleteSucess } = useSelector(state => state.products);
-    const [products, setProducts] = useState([])
-    const dispatch = useDispatch()
+    if (isLoading) {
+        return <p>Loading.....</p>
+    }
 
 
-
-    useEffect(() => {
-        fetch("http://localhost:5000/products")
-            .then((res) => res.json())
-            .then((data) => setProducts(data.data))
-    }, [])
 
 
     // useEffect(() => {
@@ -86,7 +84,7 @@ const ProductList = () => {
                                     </td>
                                     <td class='p-2'>
                                         <div class='flex justify-center'>
-                                            <button>
+                                            <button onClick={() => removeProduct(_id)}>
                                                 <svg
                                                     class='w-8 h-8 hover:text-blue-600 rounded-full hover:bg-gray-100 p-1'
                                                     fill='none'
